@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2023 Paranoid Android
+     Copyright (C) 2024 Paranoid Android
 
      SPDX-License-Identifier: Apache-2.0
 -->
@@ -52,6 +52,15 @@
             android:exported="true">
         </service>
 
+        <service
+            android:name=".camera.CameraApertureTileService"
+            android:icon="@drawable/ic_cam_tile"
+            android:label="@string/cam_aperture_toggle_title"
+            android:exported="true"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>  
     </application>
 </manifest>
-

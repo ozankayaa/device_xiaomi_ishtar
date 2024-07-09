@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2023 Paranoid Android
+// Copyright (C) 2024 Paranoid Android
 //
 // SPDX-License-Identifier: Apache-2.0
 //
@@ -7,7 +7,10 @@
 android_app {
     name: "XiaomiParts",
     certificate: "platform",
-    srcs: ["src/**/*.java"],
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt"
+    ],
     platform_apis: true,
     privileged: true,
     system_ext_specific: true,

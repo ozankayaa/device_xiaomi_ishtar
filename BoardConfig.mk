@@ -1,10 +1,10 @@
 #
-# Copyright (C) 2023-2024 Paranoid Android
+# Copyright (C) 2024 Paranoid Android
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
-COMMON_PATH := device/xiaomi/sm8550-common
+DEVICE_PATH := device/xiaomi/ishtar
 
 # A/B
 AB_OTA_UPDATER := true
@@ -74,23 +74,26 @@ BUILD_BROKEN_INCORRECT_PARTITION_IMAGES := true
 # DTB
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
+# Display
+TARGET_SCREEN_DENSITY := 530
+
 # Filesystem
-TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/configs/config.fs
+TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/configs/config.fs
 
 # HIDL
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
-    $(COMMON_PATH)/configs/vintf/framework_matrix_xiaomi.xml \
+    $(DEVICE_PATH)/configs/vintf/framework_matrix_xiaomi.xml \
     vendor/lineage/config/device_framework_matrix.xml
 
 DEVICE_MANIFEST_FILE += \
-    $(COMMON_PATH)/configs/vintf/manifest_kalama.xml \
-    $(COMMON_PATH)/configs/vintf/manifest_xiaomi.xml
+    $(DEVICE_PATH)/configs/vintf/manifest_kalama.xml \
+    $(DEVICE_PATH)/configs/vintf/manifest_xiaomi.xml
 
 DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
-DEVICE_FRAMEWORK_MANIFEST_FILE += $(COMMON_PATH)/configs/vintf/framework_manifest.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE += $(DEVICE_PATH)/configs/vintf/framework_manifest.xml
 
 # Init
-TARGET_INIT_VENDOR_LIB := //$(COMMON_PATH):libinit_xiaomi_sm8550
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_xiaomi_sm8550
 TARGET_RECOVERY_DEVICE_MODULES := libinit_xiaomi_sm8550
 
 # Kernel
@@ -110,14 +113,20 @@ BOARD_KERNEL_PAGESIZE := 4096
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 TARGET_HAS_GENERIC_KERNEL_HEADERS := true
 
+# Kernel Modules
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD += fts_touch_spi.ko
+
 # Lineage Health
 TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
 
 # Kernel Modules
-BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load.recovery))
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
 
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
+
+# OTA
+TARGET_OTA_ASSERT_DEVICE := ishtar
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
@@ -158,15 +167,15 @@ SOONG_CONFIG_XIAOMI_POWERSHARE := WIRELESS_TX_ENABLE_PATH
 SOONG_CONFIG_XIAOMI_POWERSHARE_WIRELESS_TX_ENABLE_PATH := /sys/class/qcom-battery/reverse_chg_mode
 
 # Properties
-TARGET_ODM_PROP += $(COMMON_PATH)/configs/properties/odm.prop
-TARGET_PRODUCT_PROP += $(COMMON_PATH)/configs/properties/product.prop
-TARGET_SYSTEM_PROP += $(COMMON_PATH)/configs/properties/system.prop
-TARGET_SYSTEM_EXT_PROP += $(COMMON_PATH)/configs/properties/system_ext.prop
-TARGET_VENDOR_PROP += $(COMMON_PATH)/configs/properties/vendor.prop
+TARGET_ODM_PROP += $(DEVICE_PATH)/configs/properties/odm.prop
+TARGET_PRODUCT_PROP += $(DEVICE_PATH)/configs/properties/product.prop
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/configs/properties/system.prop
+TARGET_SYSTEM_EXT_PROP += $(DEVICE_PATH)/configs/properties/system_ext.prop
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/properties/vendor.prop
 
 # Recovery
 BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
-TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/init/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/init/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_UI_MARGIN_HEIGHT := 80
 TARGET_USERIMAGES_USE_F2FS := true
@@ -174,9 +183,9 @@ TARGET_USERIMAGES_USE_F2FS := true
 # SELinux
 include device/xiaomi/sepolicy/SEPolicy.mk
 include device/qcom/sepolicy_vndr/SEPolicy.mk
-BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/private
-SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/public
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
+SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 
 # Sensors
 SOONG_CONFIG_NAMESPACES += SENSORS_XIAOMI

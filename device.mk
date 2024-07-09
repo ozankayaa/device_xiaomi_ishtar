@@ -14,7 +14,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product, vendor/xiaomi/sm8550-common/sm8550-common-vendor.mk)
+$(call inherit-product, vendor/xiaomi/ishtar/ishtar-vendor.mk)
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
@@ -318,6 +318,9 @@ PRODUCT_COPY_FILES += \
 # Kernel
 include $(LOCAL_PATH)/kernel/kernel-platform.mk
 
+# Kernel Binary
+KERNEL_PREBUILT_DIR := device/xiaomi/ishtar-kernel
+
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.1.vendor \
@@ -434,6 +437,13 @@ PRODUCT_PACKAGES += \
 
 # Overlays (ODM)
 PRODUCT_PACKAGES += \
+    IshtarFrameworks \
+    IshtarSettings2304FPN6DC \
+    IshtarSettings2304FPN6DG \
+    IshtarSettingsProvider \
+    IshtarSystemUI \
+    IshtarWifiRes \
+    IshtarWifiResMainline \
     Xiaomi8550CarrierConfigRes \
     Xiaomi8550CarrierConfigResMiui \
     Xiaomi8550Frameworks \
@@ -529,6 +539,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.ambient_temperature.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.ambient_temperature.xml \
+    frameworks/native/data/etc/android.hardware.sensor.barometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.barometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/native/data/etc/android.hardware.sensor.hifi_sensors.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.hifi_sensors.xml \

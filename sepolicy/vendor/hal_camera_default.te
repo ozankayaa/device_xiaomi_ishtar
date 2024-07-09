@@ -1,2 +1,4 @@
 allow hal_camera_client hal_camera_aon_service:service_manager find;
 add_service(hal_camera_server, hal_camera_aon_service)
+
+set_prop(hal_camera_default, vendor_miui_vcamera_prop)
